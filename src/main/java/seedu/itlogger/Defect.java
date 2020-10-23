@@ -89,6 +89,13 @@ public class Defect {
      * @throws IOException unable to create file
      */
     public static void setupLogger() throws IOException {
+        // Remove the default console handler
+        Logger parentLogger = Logger.getLogger("");
+        Handler[] handlers = parentLogger.getHandlers();
+        for (Handler handler : handlers) {
+            parentLogger.removeHandler(handler);
+        }
+
         Handler fh = new FileHandler("Defect.log", true);
         fh.setFormatter(new SimpleFormatter());
         logger.addHandler(fh);

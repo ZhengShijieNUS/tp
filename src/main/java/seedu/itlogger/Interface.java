@@ -1,5 +1,8 @@
 package seedu.itlogger;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -48,6 +51,16 @@ public class Interface {
             Defect issue = (Defect) iter.next();
             System.out.println(issue + System.lineSeparator());
         }
+    }
+
+    public static void printFileToUser(String filePath) throws IOException {
+        BufferedReader bf = new BufferedReader(new FileReader(filePath));
+        String nextLine = bf.readLine();
+        while (nextLine != null) {
+            System.out.println(nextLine);
+            nextLine = bf.readLine();
+        }
+        bf.close();
     }
 
     public static void printErrorMessageToUser(Exception errorMessage) {
