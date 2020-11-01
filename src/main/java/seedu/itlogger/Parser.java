@@ -170,6 +170,39 @@ public class Parser {
         return parsedResult;
     }
 
+    public static int parseListType(String fullInput) throws ParseException {
+        logger.info("parsing view type from user input...");
+        String possibleListType;
+        String possibleOrder;
+        try {
+            possibleListType = fullInput.split("/")[0].substring(5);
+            possibleOrder = fullInput.split("/")[1];
+        } catch (Exception e) {
+            throw new ParseException("Command has error.Please check.",1);
+        }
+        switch (possibleListType) {
+        case "sv":
+            if (possibleOrder.equals("d")) {
+                return 2;
+            } else {
+                return 1;
+            }
+        case "dl":
+            if (possibleOrder.equals("d")) {
+                return 4;
+            } else {
+                return 3;
+            }
+        case "dr":
+            if (possibleOrder.equals("d")) {
+                return 6;
+            } else {
+                return 5;
+            }
+        default:
+            return 0;
+        }
+    }
 
     public static String parseSearchType(String fullInput) {
         logger.info("parsing search type from user input...");

@@ -22,9 +22,9 @@ manage defects faster than a typical mouse/GUI driven app. Allows the user to be
 |Priority| As a … | I want to … | So that I can… |
 |--------|----------|---------------|------------------|
 |* * * |new user|add issues into IT logger|track my issues|
-|* * * |New user|view an issue that is based on the ticket number|see its progress|
+|* * * |New user|view an issue that is based on the ticket number|see its progress.|
 |* * * |New user|delete a defect|remove defects that are resolved or no longer required|
-|* * * |New user|list all issues currently in the ITLogger|find all of the recorded issues currently in ITLogger|
+|* * * |New user|list all issues currently in the ITLogger|find all of the recorded issues currently in ITLogger.|
 |* * |New user|I would like a given issue format|so that I can know a structured way of using the app|
 |* |New user|I would like the issue I logged to be date stamped|so that I know when it was raised|
 |* * * |User|be able to load defects from a text file or database|View and track all defects previously recorded in the system|
@@ -47,7 +47,7 @@ manage defects faster than a typical mouse/GUI driven app. Allows the user to be
 
 ## Glossary
 
-* *Mainstream OS:* Windows, Linux, Unix, OS-X
+* *Mainstream OS:* Windows, Linux, Unix, OS-X.
 
 ## Instructions for manual testing
 

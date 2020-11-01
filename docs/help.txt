@@ -26,7 +26,25 @@ Usage:
 
   list
     -- List all defects in the list
+    
+  list sv/a
+    -- List all defects in the list in ascending severity order
 
+  list sv/d
+    -- List all defects in the list in descending severity order
+    
+  list dl/a
+    -- List all defects in the list in ascending deadline order
+    
+  list dl/d
+    -- List all defects in the list in descending deadline order
+    
+  list dr/a
+    -- List all defects in the list in ascending date raised order
+    
+  list dl/d
+    -- List all defects in the list in descending date raised order
+    
   update u/<TICKET in integer>
     -- Go into update mode for a defect which is indicated
 
@@ -35,4 +53,18 @@ Usage:
 
   update sv/<NEW SEVERITY in integer from 0 to 10>
     -- When in update mode, update the severity of the defect
-
+    
+  search /title /<title>
+    -- Search the defects match the <title> in the issue list
+    
+  search /status /<status>
+    -- Search the defects match the <status> in the issue list
+    
+  search /severity /<severityNum>
+    -- Search the defects match the <severityNum> in the issue list
+    
+  search /owner /<owner>
+    -- Search the defects match the <owner> in the issue list
+    
+  search /deadline /<deadlineDateString(dd-MM-yyyy)>
+    -- Search the defects match the <deadline> in the issue list
