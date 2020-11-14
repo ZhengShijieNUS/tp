@@ -1,11 +1,10 @@
 # Developer Guide
 
 ## Design
-//todo overview
 
-## Architechture
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
-![Image of UpdateSequenceDiagram](https://github.com/AY2021S1-TIC4001-3/tp/blob/master/docs/Images/architecture.png)
+### Architechture
+
+![Image of UpdateSequenceDiagram](https://github.com/AY2021S1-TIC4001-3/tp/blob/master/docs/Images/architecture.png?raw=true)
 
 The Architecture Diagram given above explains the high-level design of the App. Given below is a quick overview of each component.
 
@@ -20,20 +19,36 @@ IssueList: Define the structure of each issue to track.
 
 Each of the six components,
 
-## How the architecture components interact with each other
+### How the architecture components interact with each other
 
-The Sequence Diagram below shows how the components interact with each other for the scenario where the user issues the command delete 1.
+The Sequence Diagram below shows how the components interact with each other for the scenario where the user issues the update command.
+![Image of UpdateSequenceDiagram](https://github.com/AY2021S1-TIC4001-3/tp/blob/master/docs/Images/updateSequenceDiagram.png?raw=true)
 
-//todo UI component
+### UI component
+
+![Image of UI Class Diagram](https://github.com/AY2021S1-TIC4001-3/tp/blob/master/docs/Images/interface.png?raw=true)
+
+The UI componenet is the handler of the user input and output result to the user. It includes InputHandler Class which will deal with user input, and Interface Class which will handle all the console printing interaction. Project team have also store the information of help command inside Interface which will make the help command work when the program is compiled into the jar file.
+
+Both InputHandler and Interface contains only static method, which will be utilize in all the other classes. But the majority of the method call was from the main class, ItLogger.
+
+### FINDER component
+
+![Image of Finder Class Diagram](https://github.com/AY2021S1-TIC4001-3/tp/blob/master/docs/Images/finder.png?raw=true)
+
+The FINDER component includes Search and Sort classes. It is used to provide an organised output based on the user desired output selection option.
+Sort class is consist of API to sort the issuelist in given request with quick sort algorithm. It is called from view command with addon keyword to view the sorted list.
 
 
-//todo FINDER component
+### Storage Component
+
+![Image of Storage Class Diagram](https://github.com/AY2021S1-TIC4001-3/tp/blob/master/docs/Images/storage.png?raw=true)
+
+The Storage component loads a list of ItLogger Defects from a text file when the program starts up. It makes use of the Parser class to create a Defect object from a String.
+It also saves Defects to file upon program exit. It saves to format that is readable by the Parser class.
 
 
-//todo STORAGE component
-
-
-## IssueList component
+### IssueList component
 
 The IssueList component is the container to save the data of defects during execution of program. It consist two classes, IssueList and Defects. Issuelist has a vector to store defects.  And the Defect class is the class of defects as what we defined. It contains the defect name, status, severity,date raised, deadline and owner.
 
@@ -45,17 +60,39 @@ The IssueList component:
 * Able to get the whole IssueList itself 
 * Able to set/get all details of any specified defect
 
-![Image of IssueListComponentClassDiagram](https://github.com/AY2021S1-TIC4001-3/tp/blob/master/docs/Images/IssueListComponent.png)
+![Image of IssueListComponentClassDiagram](https://github.com/AY2021S1-TIC4001-3/tp/blob/master/docs/Images/IssueListComponent.png?raw=true)
 
-## COMMONS component
+### COMMONS component
 
-The commons component are those classes used by multiple components are in the program,such as enum classes and the parser class.
+The commons component are those classes used by multiple components are in the program, such as enum classes and the parser class.
 
 The parser class is mainly in charge of parse user's input and convert them to a workable format to the program. The enum classes are used to strict the keywords. 
 
 ## Implementation
-// take one user story as example to showcase how certain features are implemented. 
 
+Search Implementation
+
+The ```search``` feature displays all items in the the ItLogger. It is facillated by the Search Class which comprises of the following implementation:
+
+1. ```Search#searchTitle``` - searches all Issue in the ItLogger by title listed
+2. ```Search#searchStatus``` - searches all Issue in the ItLogger by status listed
+3. ```Search#searchSeverity``` - searches all Issue in the ItLogger by severity listed
+4. ```Search#searchDeadline``` - searches all Issue in the ItLogger by deadline listed
+5. ```Search#searchOwner``` - searches all Issue in the ItLogger by owner listed
+
+The following sequence diagram shows how the Search operation works.
+![Image of SearchSequenceDiagram](https://github.com/AY2021S1-TIC4001-3/tp/blob/master/docs/Images/search_seq_diag.jpg?raw=true)
+
+##### Design consideration:
+Aspect: Search can otherwise be implemented
+
+###### Alternative 1 (current choice): Allow user to search returning result in the order they are stored.
+Pros: Easy to implement. <br>
+Cons: Less relevant result to user.
+
+###### Alternative 2: Allow user to sort the search e.g. by Alphabetical order.
+Pros: More relevant result to user.<br>
+Cons: more difficult to implement.
 
 ## Product scope
 ### Target user profile
@@ -103,7 +140,46 @@ manage defects faster than a typical mouse/GUI driven app. Allows the user to be
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Launch and Shutdown
 
-![Image of UpdateSequenceDiagram](https://github.com/AY2021S1-TIC4001-3/tp/blob/master/docs/Images/updateSequenceDiagram.png)
+1. Initial launch
+    1. Download the jar file and copy into an empty folder
+    2. Use Command Prompt to run jar file with `java -jar` command.
+    3. type exit command to exit from the program.
 
+2. Re-launch the app by running `java -jar` command with Command Prompt.
+
+### Adding a defect
+1. Add the Defect through following command:
+    1. add t/<TITLE> s/<STATUS> sv/<SEVERITY in integer from 0 to 10> dl/<DEADLINE in dd-mm-yyyy format> o/<OWNER>
+ 
+### Updating a defect
+1. Enter the update mode for a defect:
+    1. update u/<TICKET in integer>
+2. When in update mode, update the title of the defect:
+    1. update t/<NEW TITLE>
+3. When in update mode, update the severity of the defect:
+    1. update sv/<NEW SEVERITY in integer from 0 to 10>
+
+### Listing all Defects in the system
+1. Enter the command
+    1. List
+2. List of all Defects in the system will be listed in the order they were created.
+
+### Viewing a particular Defect in the system
+1. Enter the command
+    1. View /index. Eg:View 1
+2. The second Defect created will be shown on screen in details.
+
+### Delete a particular Defect in the system
+1. Enter the command
+    1. Delete d/index. Eg:Delete d/1
+2. The second Defect will be deleted.
+
+### Load a list of Defects into the progam upon lauch
+1. Program looks for and loads itlogger.txt
+2. If file is not found, no Defects will be preloaded. Program starts as per normal operation.
+
+### Save a list of Defects into itlogger.txt upon exit
+1. Saves all Defects into the itlogger.txt file when user enters the Exit command.
+2. If file does not exist, itlogger.txt will be created.

@@ -44,14 +44,3 @@ IT Logger is a desktop app for managing program issues, and tracking issue resol
 |exit|exit|
 
 
-## FAQ
-
-**Q**: How do I transfer my data to another computer? 
-
-**A**: {your answer here}.
-
-## Command Summary
-
-{Give a 'cheat sheet' of commands here}.
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
